@@ -11,6 +11,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Color NoTargetColor = Color.green;
     [SerializeField] private Color TargetColor= Color.green;
     [SerializeField] private ParticleSystem fireMuzzle;
+    [SerializeField] private EnemyBleed targetBleed;
     private RaycastHit hit;
     public void shoot(InputAction.CallbackContext ctx)
     {
@@ -18,7 +19,8 @@ public class Shooting : MonoBehaviour
         {
             fireMuzzle.Play();
             if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, maxDistance: 1000f, enemies))
-            {          
+            {
+                targetBleed.onHit(hit.transform.position);
                 hit.transform.gameObject.SetActive(false);
             }
         }
