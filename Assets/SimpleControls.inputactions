@@ -6,15 +6,6 @@
             "id": "265c38f5-dd18-4d34-b198-aec58e1627ff",
             "actions": [
                 {
-                    "name": "fire",
-                    "type": "Button",
-                    "id": "1077f913-a9f9-41b1-acb3-b9ee0adbc744",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Tap,SlowTap",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MoveHorizontal",
                     "type": "PassThrough",
                     "id": "8996ca83-6124-450f-8553-e9c71a488a35",
@@ -49,20 +40,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "e1c61995-d02b-4c13-a4d1-317e002e6026",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "abb776f3-f329-4f7b-bbf8-b577d13be018",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "movekeys",
                     "id": "11c5d72d-faec-4244-93f3-f16878a7a9ce",
@@ -148,6 +137,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MouseY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8556fc60-12f0-419f-9874-58e60df7c22a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

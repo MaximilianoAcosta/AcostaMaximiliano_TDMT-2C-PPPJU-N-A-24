@@ -28,15 +28,6 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             ""id"": ""265c38f5-dd18-4d34-b198-aec58e1627ff"",
             ""actions"": [
                 {
-                    ""name"": ""fire"",
-                    ""type"": ""Button"",
-                    ""id"": ""1077f913-a9f9-41b1-acb3-b9ee0adbc744"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Tap,SlowTap"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MoveHorizontal"",
                     ""type"": ""PassThrough"",
                     ""id"": ""8996ca83-6124-450f-8553-e9c71a488a35"",
@@ -71,20 +62,18 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1c61995-d02b-4c13-a4d1-317e002e6026"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""abb776f3-f329-4f7b-bbf8-b577d13be018"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""movekeys"",
                     ""id"": ""11c5d72d-faec-4244-93f3-f16878a7a9ce"",
@@ -172,6 +161,17 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""action"": ""MouseY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8556fc60-12f0-419f-9874-58e60df7c22a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -180,11 +180,11 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
 }");
         // gameplay
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
-        m_gameplay_fire = m_gameplay.FindAction("fire", throwIfNotFound: true);
         m_gameplay_MoveHorizontal = m_gameplay.FindAction("MoveHorizontal", throwIfNotFound: true);
         m_gameplay_Jump = m_gameplay.FindAction("Jump", throwIfNotFound: true);
         m_gameplay_MouseX = m_gameplay.FindAction("MouseX", throwIfNotFound: true);
         m_gameplay_MouseY = m_gameplay.FindAction("MouseY", throwIfNotFound: true);
+        m_gameplay_Fire = m_gameplay.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,20 +246,20 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     // gameplay
     private readonly InputActionMap m_gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_gameplay_fire;
     private readonly InputAction m_gameplay_MoveHorizontal;
     private readonly InputAction m_gameplay_Jump;
     private readonly InputAction m_gameplay_MouseX;
     private readonly InputAction m_gameplay_MouseY;
+    private readonly InputAction m_gameplay_Fire;
     public struct GameplayActions
     {
         private @SimpleControls m_Wrapper;
         public GameplayActions(@SimpleControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @fire => m_Wrapper.m_gameplay_fire;
         public InputAction @MoveHorizontal => m_Wrapper.m_gameplay_MoveHorizontal;
         public InputAction @Jump => m_Wrapper.m_gameplay_Jump;
         public InputAction @MouseX => m_Wrapper.m_gameplay_MouseX;
         public InputAction @MouseY => m_Wrapper.m_gameplay_MouseY;
+        public InputAction @Fire => m_Wrapper.m_gameplay_Fire;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,9 +269,6 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @fire.started += instance.OnFire;
-            @fire.performed += instance.OnFire;
-            @fire.canceled += instance.OnFire;
             @MoveHorizontal.started += instance.OnMoveHorizontal;
             @MoveHorizontal.performed += instance.OnMoveHorizontal;
             @MoveHorizontal.canceled += instance.OnMoveHorizontal;
@@ -284,13 +281,13 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @MouseY.started += instance.OnMouseY;
             @MouseY.performed += instance.OnMouseY;
             @MouseY.canceled += instance.OnMouseY;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @fire.started -= instance.OnFire;
-            @fire.performed -= instance.OnFire;
-            @fire.canceled -= instance.OnFire;
             @MoveHorizontal.started -= instance.OnMoveHorizontal;
             @MoveHorizontal.performed -= instance.OnMoveHorizontal;
             @MoveHorizontal.canceled -= instance.OnMoveHorizontal;
@@ -303,6 +300,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @MouseY.started -= instance.OnMouseY;
             @MouseY.performed -= instance.OnMouseY;
             @MouseY.canceled -= instance.OnMouseY;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -322,10 +322,10 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     public GameplayActions @gameplay => new GameplayActions(this);
     public interface IGameplayActions
     {
-        void OnFire(InputAction.CallbackContext context);
         void OnMoveHorizontal(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

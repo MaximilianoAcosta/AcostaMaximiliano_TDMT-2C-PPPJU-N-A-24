@@ -7,6 +7,10 @@ public class EntityMovement : MonoBehaviour
     
     private Vector3 direction;
 
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     public void SetDirection(Vector3 dir)
     {
         direction=dir;

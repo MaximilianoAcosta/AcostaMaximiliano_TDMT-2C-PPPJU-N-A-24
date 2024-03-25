@@ -15,7 +15,7 @@ public class Shooting : MonoBehaviour
     private RaycastHit hit;
     public void shoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.started)
         {
             fireMuzzle.Play();
             if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, maxDistance: 1000f, enemies))
