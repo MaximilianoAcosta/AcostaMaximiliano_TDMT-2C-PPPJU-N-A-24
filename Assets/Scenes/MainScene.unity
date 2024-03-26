@@ -1308,7 +1308,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &655026732
 GameObject:
@@ -1486,6 +1486,18 @@ MonoBehaviour:
       - m_Target: {fileID: 646874623}
         m_TargetAssemblyTypeName: MouseLook, Assembly-CSharp
         m_MethodName: ReceiveMouseInputX
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 646874621}
+        m_TargetAssemblyTypeName: PlayerMovementnt, Assembly-CSharp
+        m_MethodName: moveOnturn
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
