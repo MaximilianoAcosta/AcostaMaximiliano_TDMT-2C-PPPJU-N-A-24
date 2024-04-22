@@ -20,7 +20,9 @@ public class Shooting : MonoBehaviour
             fireMuzzle.Play();
             if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, maxDistance: 1000f, enemies))
             {
+                
                 targetBleed.onHit(hit.point);
+                Debug.Log(hit.transform.gameObject.name);
                 hit.transform.gameObject.SetActive(false);
             }
         }
