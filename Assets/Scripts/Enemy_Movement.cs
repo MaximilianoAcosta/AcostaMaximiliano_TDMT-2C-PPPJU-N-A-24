@@ -21,12 +21,9 @@ public class Enemy_Movement : MonoBehaviour
         {
             EnemyBehaviour.Agent.isStopped =false;
             EnemyBehaviour.Agent.SetDestination(EnemyBehaviour.Player.position);
-            
-
         }
         else
         {
-            //AnimController.SetVelocity(0);
             EnemyBehaviour.Agent.isStopped = true;
             Vector3 targetPosition = EnemyBehaviour.Player.position;
             targetPosition.y = transform.position.y;

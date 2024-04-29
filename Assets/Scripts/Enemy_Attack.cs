@@ -29,12 +29,14 @@ public class Enemy_Attack : MonoBehaviour
     private IEnumerator ActivateAttackHitBox()
     {
         EnemyBehaviour.CanAttack = false;
+        EnemyBehaviour.IsAttacking = true;
         AnimController.SetIsAttacking(true);
         yield return new WaitForSeconds(AttackWindup);
         Collider.gameObject.SetActive(true);
         yield return new WaitForSeconds(AttackDuration);
-        AnimController.SetIsAttacking(false);
+        EnemyBehaviour.IsAttacking = false;
         Collider.gameObject.SetActive(false);
+        AnimController.SetIsAttacking(false);
         StartCoroutine(WaitBetWeenAttacks());
     }
     private IEnumerator WaitBetWeenAttacks()
