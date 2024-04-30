@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Enemy_Movement : MonoBehaviour
 {
@@ -11,16 +7,19 @@ public class Enemy_Movement : MonoBehaviour
     [SerializeField] private Enemy_Animation_Controller AnimController;
     private void Start()
     {
-        EnemyBehaviour=GetComponent<Enemy_Behaviour>();
-        AnimController=GetComponent<Enemy_Animation_Controller>();
+        EnemyBehaviour = GetComponent<Enemy_Behaviour>();
+        AnimController = GetComponent<Enemy_Animation_Controller>();
     }
 
     public void MoveToTarget()
     {
-        if (GetDistanceToPlayer()> MinDistance)
+
+        if (GetDistanceToPlayer() > MinDistance)
         {
-            EnemyBehaviour.Agent.isStopped =false;
-            EnemyBehaviour.Agent.SetDestination(EnemyBehaviour.Player.position);
+            EnemyBehaviour.Agent.isStopped = false;
+
+            EnemyBehaviour.Agent.SetDestination(EnemyBehaviour.GetPlayer().position);
+
         }
         else
         {
@@ -30,6 +29,7 @@ public class Enemy_Movement : MonoBehaviour
             transform.LookAt(targetPosition);
         }
         AnimController.SetVelocity(EnemyBehaviour.Agent.velocity.magnitude);
+
     }
     private float GetDistanceToPlayer()
     {
