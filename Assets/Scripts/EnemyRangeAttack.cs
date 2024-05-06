@@ -4,27 +4,29 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Attack : MonoBehaviour
+public class EnemyRangeAttack : MonoBehaviour, IEnemyAttack
 {
-
-    [SerializeField] private Enemy_Behaviour EnemyBehaviour;
+    [SerializeField] private EnemyBehaviour EnemyBehaviour;
     [SerializeField] private Enemy_Animation_Controller AnimController;
-    [SerializeField] private Collider Collider;
+    [SerializeField] private GameObject Projectile;
+    [SerializeField] private GameObject ProjectileSpawnPoint; 
     [SerializeField] private float AttackWindup;
     [SerializeField] private float AttackDuration;
     [SerializeField] private float AttackCoolDown;
     private void Start()
     {
-        EnemyBehaviour = GetComponent<Enemy_Behaviour>();
+        EnemyBehaviour = GetComponent<EnemyBehaviour>();
+        AnimController = GetComponent<Enemy_Animation_Controller>();
     }
 
     public void Attack()
     {
-        
-            Debug.Log("Attacked");
-            StartCoroutine(ActivateAttackHitBox());
-        
-        
+
+        // Debug.Log("Attacked");
+
+        StartCoroutine(ActivateAttackHitBox());
+
+
     }
     private IEnumerator ActivateAttackHitBox()
     {
@@ -32,10 +34,9 @@ public class Enemy_Attack : MonoBehaviour
         EnemyBehaviour.IsAttacking = true;
         AnimController.SetIsAttacking(true);
         yield return new WaitForSeconds(AttackWindup);
-        Collider.gameObject.SetActive(true);
+        Instantiate(Projectile,ProjectileSpawnPoint.transform.position, transform.rotation);
         yield return new WaitForSeconds(AttackDuration);
         EnemyBehaviour.IsAttacking = false;
-        Collider.gameObject.SetActive(false);
         AnimController.SetIsAttacking(false);
         StartCoroutine(WaitBetWeenAttacks());
     }

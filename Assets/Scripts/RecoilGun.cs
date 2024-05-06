@@ -10,14 +10,6 @@ public class RecoilGun : MonoBehaviour
     [SerializeField] private float maxRecoil_x  = -20;
     [SerializeField] private float recoilSpeed  = 10;
     [SerializeField]private float recoil = 0.0f;
-
-    public void ShootRecoil(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            recoil += 0.1f;
-        }
-    }
     private void Update()
     {
         recoiling();
@@ -37,5 +29,8 @@ public class RecoilGun : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
         }
     }
-
+    public void TriggerRecoil()
+    {
+        recoil += 0.1f;
+    }
 }

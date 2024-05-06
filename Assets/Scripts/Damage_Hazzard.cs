@@ -6,13 +6,16 @@ public class Damage_Hazzard : MonoBehaviour
 {
     [SerializeField] private string tagToCollide;
     [SerializeField] private float damage;
-    [SerializeField] private HealthController PlayerHealth = null;
+    [SerializeField] private HealthController PlayerHealth;
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag(tagToCollide))
         {
-            Debug.Log($"{tagToCollide} hit");
-            PlayerHealth = other.GetComponent<HealthController>();
+            //Debug.Log($"{tagToCollide} hit");
+            if (PlayerHealth==null)
+            {
+                PlayerHealth = other.GetComponent<HealthController>();
+            }
             PlayerHealth.takeDamage(damage);
         }
     }

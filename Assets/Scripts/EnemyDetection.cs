@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class EnemyDetection : MonoBehaviour
 {
-    [SerializeField] private Enemy_Behaviour enemyBehaviour;
+    [SerializeField] private EnemyBehaviour enemyBehaviour;
     [SerializeField] private Transform target;
     [SerializeField] private float ChaseDuration;
     [SerializeField] private bool IsChasing;
@@ -19,7 +19,7 @@ public class EnemyDetection : MonoBehaviour
         }
         if (target != null && !IsChasing)
         {
-            raycastToPlayer();
+            RaycastToPlayer();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -39,7 +39,7 @@ public class EnemyDetection : MonoBehaviour
         enemyBehaviour.Player = transform;
     }
 
-    private void raycastToPlayer()
+    private void RaycastToPlayer()
     {
         Vector3 Origin = transform.position;
         Origin.y = 0;

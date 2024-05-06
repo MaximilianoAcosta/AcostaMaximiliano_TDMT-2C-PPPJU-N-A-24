@@ -12,6 +12,7 @@ public class HealthController : MonoBehaviour
     
 
     public UnityEvent onDamageTakenEvent;
+    public UnityEvent onDeathEvent;
 
 
     public void Start()
@@ -25,7 +26,7 @@ public class HealthController : MonoBehaviour
     public void takeDamage(float damage)
     {
         Health -= damage;
-        onDamageTakenEvent.Invoke();
+        onDamageTakenEvent?.Invoke();
 
         CheckIfDead();
     }
@@ -33,7 +34,7 @@ public class HealthController : MonoBehaviour
     {
         if (Health <= 0)
         {
-            gameObject.SetActive(false);
+            onDeathEvent?.Invoke();
         }
     }
 

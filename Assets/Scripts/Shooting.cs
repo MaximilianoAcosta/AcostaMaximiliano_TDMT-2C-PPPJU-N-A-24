@@ -1,42 +1,49 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private LayerMask enemies;
+    [SerializeField] private string EnemyTag;
     [SerializeField] GameObject PlayerCamera;
-    [SerializeField] private GameObject Crosshair;
-    [SerializeField] private Color NoTargetColor = Color.green;
-    [SerializeField] private Color TargetColor= Color.green;
     [SerializeField] private ParticleSystem fireMuzzle;
     [SerializeField] private EnemyBleed targetBleed;
+    [SerializeField] private float damage;
+    [SerializeField] private bool CanShoot = true;
+    [SerializeField] float RateOfFire;
+    [SerializeField] private RecoilGun recoilGun;
     private RaycastHit hit;
+
     public void shoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
+        if (ctx.started && CanShoot)
         {
+
+            StartCoroutine(WaitBetweenShots());
+            recoilGun.TriggerRecoil();
             fireMuzzle.Play();
-            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, maxDistance: 1000f, enemies))
+            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, maxDistance: 1000f))
             {
-                
-                targetBleed.onHit(hit.point);
-                Debug.Log(hit.transform.gameObject.name);
-                hit.transform.gameObject.SetActive(false);
+                if (hit.transform.gameObject.CompareTag(EnemyTag))
+                {
+                    HealthController EnemyHealth;
+                    targetBleed.onHit(hit.point);
+                    hit.transform.TryGetComponent(out EnemyHealth);
+                    if (EnemyHealth != null)
+                    {
+                        EnemyHealth.takeDamage(damage);
+                    }
+                }
             }
+
         }
     }
-    private void Update()
+
+    private IEnumerator WaitBetweenShots()
     {
-        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, maxDistance: 1000f, enemies))
-        {
-            Crosshair.GetComponent<Image>().color = TargetColor;
-        }
-        else
-        {
-            Crosshair.GetComponent<Image>().color = NoTargetColor;
-        }
+        CanShoot = false;
+        yield return new WaitForSeconds(RateOfFire);
+        CanShoot = true;
     }
 }
 

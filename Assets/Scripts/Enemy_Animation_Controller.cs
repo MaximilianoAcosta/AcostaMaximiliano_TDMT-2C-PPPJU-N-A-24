@@ -22,7 +22,7 @@ public class Enemy_Animation_Controller : MonoBehaviour
     {
         animator.SetBool(PIsDead, b);
     }
-    public void SetTookDamage(bool b)
+    public void SetTookDamage()
     {
         animator.SetTrigger(PTookDamage);
     }
