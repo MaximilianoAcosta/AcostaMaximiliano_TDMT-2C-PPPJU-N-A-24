@@ -5,10 +5,10 @@ using UnityEngine;
 public class DisableEnemyOnDeath : MonoBehaviour
 {
     [SerializeField] private float disabledelay;
- 
+    [SerializeField] private Collider enemyHitbox;
     public void DisableOnDeath()
     {
-        
+        enemyHitbox.enabled = false;
         StartCoroutine(DisableAfterTime());
     }
     private IEnumerator DisableAfterTime()
