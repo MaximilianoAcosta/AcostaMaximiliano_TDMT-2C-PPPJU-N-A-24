@@ -42,9 +42,9 @@ public class EnemyDetection : MonoBehaviour
     private void RaycastToPlayer()
     {
         Vector3 Origin = transform.position;
-        Origin.y = 0;
+        //Origin.y = 0;
         Vector3 objective = target.position;
-        objective.y = 0;
+        //objective.y = 0;
         Vector3 direction = objective - Origin;
         if (Physics.Raycast(Origin, direction, out hit, direction.magnitude))
         {

@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBehaviour: {fileID: 605658823207899245}
   target: {fileID: 0}
-  ChaseDuration: 1
+  ChaseDuration: 2
   IsChasing: 0
   PlayerTag: Player
 --- !u!1 &6143434707461022899
@@ -87,6 +87,8 @@ GameObject:
   - component: {fileID: 3072149010955703610}
   - component: {fileID: 3034557494199465184}
   - component: {fileID: 3269809972852809355}
+  - component: {fileID: 6851954252259570220}
+  - component: {fileID: 5066631860989848834}
   m_Layer: 6
   m_Name: EnemyRange
   m_TagString: Enemy
@@ -184,6 +186,7 @@ MonoBehaviour:
   EnemyMovement: {fileID: 3072149010955703610}
   EnemyDetection: {fileID: 5472717468760307417}
   PlayerTag: Player
+  IsDead: 0
   Player: {fileID: 4079088567652736195}
   Agent: {fileID: 6713297641535161652}
 --- !u!114 &3072149010955703610
@@ -201,6 +204,7 @@ MonoBehaviour:
   MinDistance: 8
   EnemyBehaviour: {fileID: 605658823207899245}
   AnimController: {fileID: 3034557494199465184}
+  StunDuration: 1
 --- !u!114 &3034557494199465184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +242,99 @@ MonoBehaviour:
   AttackWindup: 0.3
   AttackDuration: 0.2
   AttackCoolDown: 3.5
+--- !u!114 &6851954252259570220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143434707461022899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f266d87f6d09d458dfcea491db8e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  onDamageTakenEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3034557494199465184}
+        m_TargetAssemblyTypeName: Enemy_Animation_Controller, Assembly-CSharp
+        m_MethodName: SetTookDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3072149010955703610}
+        m_TargetAssemblyTypeName: EnemyMovement, Assembly-CSharp
+        m_MethodName: GetStun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3034557494199465184}
+        m_TargetAssemblyTypeName: Enemy_Animation_Controller, Assembly-CSharp
+        m_MethodName: SetIsDead
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 605658823207899245}
+        m_TargetAssemblyTypeName: EnemyBehaviour, Assembly-CSharp
+        m_MethodName: SetIsDead
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5066631860989848834}
+        m_TargetAssemblyTypeName: DisableEnemyOnDeath, Assembly-CSharp
+        m_MethodName: DisableOnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &5066631860989848834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143434707461022899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae7819b329cd94287fa5753dcba404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledelay: 5
+  enemyHitbox: {fileID: 7042703542676239798}
 --- !u!1 &7934919973170378996
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,8 +692,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: -1648576049308844548, guid: 410c607a15b858444b4c6d72b514d0a9,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 422316fd9cebb6e4b906f680bac0e717, type: 2}
     - target: {fileID: 3882815353823017779, guid: 410c607a15b858444b4c6d72b514d0a9,
         type: 3}
       propertyPath: m_Layer

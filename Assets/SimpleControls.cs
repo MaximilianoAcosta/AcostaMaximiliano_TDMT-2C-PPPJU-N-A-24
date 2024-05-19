@@ -37,7 +37,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Button 1"",
                     ""type"": ""Button"",
                     ""id"": ""1fd6f153-f268-4e70-84bd-4abb6fed4977"",
                     ""expectedControlType"": ""Button"",
@@ -132,11 +132,22 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8c42209c-79a6-4407-a7bf-47888a9e0450"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Button 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ae4d084-6fc1-45a3-9bde-8d08b29cbab3"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button 1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -181,7 +192,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         // gameplay
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
         m_gameplay_MoveHorizontal = m_gameplay.FindAction("MoveHorizontal", throwIfNotFound: true);
-        m_gameplay_Jump = m_gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_gameplay_Button1 = m_gameplay.FindAction("Button 1", throwIfNotFound: true);
         m_gameplay_MouseX = m_gameplay.FindAction("MouseX", throwIfNotFound: true);
         m_gameplay_MouseY = m_gameplay.FindAction("MouseY", throwIfNotFound: true);
         m_gameplay_Fire = m_gameplay.FindAction("Fire", throwIfNotFound: true);
@@ -247,7 +258,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_gameplay_MoveHorizontal;
-    private readonly InputAction m_gameplay_Jump;
+    private readonly InputAction m_gameplay_Button1;
     private readonly InputAction m_gameplay_MouseX;
     private readonly InputAction m_gameplay_MouseY;
     private readonly InputAction m_gameplay_Fire;
@@ -256,7 +267,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         private @SimpleControls m_Wrapper;
         public GameplayActions(@SimpleControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveHorizontal => m_Wrapper.m_gameplay_MoveHorizontal;
-        public InputAction @Jump => m_Wrapper.m_gameplay_Jump;
+        public InputAction @Button1 => m_Wrapper.m_gameplay_Button1;
         public InputAction @MouseX => m_Wrapper.m_gameplay_MouseX;
         public InputAction @MouseY => m_Wrapper.m_gameplay_MouseY;
         public InputAction @Fire => m_Wrapper.m_gameplay_Fire;
@@ -272,9 +283,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @MoveHorizontal.started += instance.OnMoveHorizontal;
             @MoveHorizontal.performed += instance.OnMoveHorizontal;
             @MoveHorizontal.canceled += instance.OnMoveHorizontal;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
+            @Button1.started += instance.OnButton1;
+            @Button1.performed += instance.OnButton1;
+            @Button1.canceled += instance.OnButton1;
             @MouseX.started += instance.OnMouseX;
             @MouseX.performed += instance.OnMouseX;
             @MouseX.canceled += instance.OnMouseX;
@@ -291,9 +302,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @MoveHorizontal.started -= instance.OnMoveHorizontal;
             @MoveHorizontal.performed -= instance.OnMoveHorizontal;
             @MoveHorizontal.canceled -= instance.OnMoveHorizontal;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
+            @Button1.started -= instance.OnButton1;
+            @Button1.performed -= instance.OnButton1;
+            @Button1.canceled -= instance.OnButton1;
             @MouseX.started -= instance.OnMouseX;
             @MouseX.performed -= instance.OnMouseX;
             @MouseX.canceled -= instance.OnMouseX;
@@ -323,7 +334,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnMoveHorizontal(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnButton1(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);

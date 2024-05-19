@@ -8,12 +8,12 @@ public class PlayerMovementnt : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private EntityMovement characterMover;
     private Vector2 HorizontalInput;
-    public void getHorizontalInput(InputAction.CallbackContext ctx)
+    public void GetHorizontalInput(InputAction.CallbackContext ctx)
     {   
         HorizontalInput = ctx.ReadValue<Vector2>();
         MovePlayer(HorizontalInput);
     }
-    public void moveOnturn(InputAction.CallbackContext ctx)
+    public void MoveOnturn(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
@@ -23,7 +23,7 @@ public class PlayerMovementnt : MonoBehaviour
 
     private void MovePlayer(Vector2 direction)
     {
-        Vector3 HorizontalMovement = (transform.right * direction.x + transform.forward * direction.y) * speed * Time.fixedDeltaTime;
+        Vector3 HorizontalMovement = speed * Time.fixedDeltaTime * (transform.right * direction.x + transform.forward * direction.y);
         characterMover.SetDirection(HorizontalMovement);
     }
 
