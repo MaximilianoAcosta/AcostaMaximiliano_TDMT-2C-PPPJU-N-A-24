@@ -7,6 +7,10 @@ using UnityEngine.Events;
 public class ConsoleDoorButton : MonoBehaviour
 {
     public static int ButtonsPressed;
+    private void Start()
+    {
+        ButtonsPressed = 0;
+    }
 
     [SerializeField] bool ThisButtonPressed;
     [SerializeField] SpriteRenderer screen;
