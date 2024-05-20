@@ -207,7 +207,7 @@ MonoBehaviour:
   MinDistance: 2.4
   EnemyBehaviour: {fileID: 3775749374279248962}
   AnimController: {fileID: 4886189761351415254}
-  StunDuration: 1
+  StunDuration: 5
 --- !u!114 &1111979969682101559
 MonoBehaviour:
   m_ObjectHideFlags: 0
