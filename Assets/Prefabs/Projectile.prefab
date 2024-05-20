@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7680464742400417825}
   - component: {fileID: 9170237698265893762}
   - component: {fileID: 7361186418725680519}
+  - component: {fileID: 2182459396768598067}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Projectile
@@ -125,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0afa0245b2467444ad66382593b7fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 2182459396768598067}
+  speed: 30
 --- !u!114 &2014637463898821834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5014,3 +5017,33 @@ MonoBehaviour:
   onDamageTakenEvent:
     m_PersistentCalls:
       m_Calls: []
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!54 &2182459396768598067
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741684917334193554}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

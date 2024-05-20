@@ -52,8 +52,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.6327028
+  m_Center: {x: 0.006252996, y: 0, z: 0.06894949}
 --- !u!114 &2974063341030048090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,8 +68,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBehaviour: {fileID: 3775749374279248962}
   target: {fileID: 0}
-  ChaseDuration: 1
+  ChaseDuration: 10
   IsChasing: 0
+  AngleChase: 120
   PlayerTag: Player
 --- !u!1 &3616923952195140472
 GameObject:
@@ -144,11 +145,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3616923952195140472}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0afa0245b2467444ad66382593b7fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  speed: 0
 --- !u!195 &8232410638051665099
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -222,7 +225,7 @@ MonoBehaviour:
   Collider: {fileID: 8739261049758966266}
   AttackWindup: 0.35
   AttackDuration: 0.2
-  AttackCoolDown: 1.8
+  AttackCoolDown: 1.3
 --- !u!114 &4886189761351415254
 MonoBehaviour:
   m_ObjectHideFlags: 0
